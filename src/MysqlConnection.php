@@ -13,7 +13,7 @@ class MysqlConnection extends IlluminateMySqlConnection
     {
         parent::__construct($pdo, $database, $tablePrefix, $config);
 
-        if (class_exists(DoctrineType::class)) {
+        if (class_exists(DoctrineType::class) && env('VAPOR_API_TOKEN') === null) {
             // Prevent geometry type fields from throwing a 'type not found' error when changing them
             $geometries = [
                 'geometry',
